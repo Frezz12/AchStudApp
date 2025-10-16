@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="logout">#FF4D4D</color>
+    <color name="EmailProfileColor">#7C000000</color>
+    <color name="ach_background">#5056C1</color>
+</resources>

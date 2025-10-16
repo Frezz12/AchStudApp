@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AchStudApp</string>
+    <string name="NameStudentInProfile">Имя Студента</string>
+    <string name="EmailStudentInProfile">Email@gmail.com</string>
+    <string name="prevAch">Назад</string>
+    <string name="nextAch">Далее</string>
+
+</resources>
