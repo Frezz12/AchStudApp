@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.Fragment;
 
 import com.example.achstudapp.R;
 import com.example.achstudapp.adapters.AchievementAdapter;
@@ -18,6 +19,9 @@ import com.example.achstudapp.api.ApiService;
 import com.example.achstudapp.api.TokenManager;
 import com.example.achstudapp.models.AchievementWrapper;
 import com.example.achstudapp.models.User;
+import com.example.achstudapp.ui.fragments.ProfileFragment;
+import com.example.achstudapp.ui.fragments.SearchFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     Button prevButton, nextButton, logoutButton;
     ApiService api;
     TokenManager tokenManager;
+
+    BottomNavigationView bottomNavigationView;
     int userId = -1;
 
     @Override
@@ -62,6 +68,27 @@ public class MainActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.logout);
 
         adminView.setVisibility(ViewPager2.GONE);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        loadFragment(new ProfileFragment());
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            Fragment selected = null;
+
+            if (item.getItemId() == R.id.nav_profile) {
+                selected = new ProfileFragment();
+            } else if (item.getItemId() == R.id.nav_search) {
+                selected = new SearchFragment();
+            }
+
+
+            if (selected != null) {
+                loadFragment(selected);
+                return true;
+            }
+            return false;
+        });
 
         // Проверка на null для кнопок
         if (prevButton == null) {
@@ -178,5 +205,12 @@ public class MainActivity extends AppCompatActivity {
         tokenManager.clearToken();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         Toast.makeText(this, "Вы успешно вышли из аккаунта", Toast.LENGTH_SHORT).show();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }
