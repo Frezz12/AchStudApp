@@ -37,7 +37,7 @@ import retrofit2.Response;
 public class ProfileFragment extends Fragment {
     ViewPager2 viewPager;
     TextView usernameView, emailView, collegeView, adminView;
-    Button prevButton, nextButton, logoutButton;
+    Button prevButton, nextButton, logoutButton, createAchBtn;
     ApiService api;
     TokenManager tokenManager;
 
@@ -59,6 +59,7 @@ public class ProfileFragment extends Fragment {
         prevButton = view.findViewById(R.id.prevButton);
         nextButton = view.findViewById(R.id.nextButton);
         logoutButton = view.findViewById(R.id.logout);
+        createAchBtn = view.findViewById(R.id.createAchBtn);
 
         adminView.setVisibility(ViewPager2.GONE);
 
@@ -114,9 +115,17 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        loadUserById(userId);
+        createAchBtn.setOnClickListener(v -> {
+            CreateAchFragment createAchFragment = new CreateAchFragment();
 
-        logoutButton.setOnClickListener(v -> logout());
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, createAchFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        loadUserById(userId);
 
         return view;
     }
@@ -178,11 +187,5 @@ public class ProfileFragment extends Fragment {
         } else {
             viewPager.setAdapter(new AchievementAdapter(achievements));
         }
-    }
-
-    private void logout() {
-        tokenManager.clearToken();
-        startActivity(new Intent(requireContext(), LoginActivity.class));
-        Toast.makeText(requireContext(), "Вы успешно вышли из аккаунта", Toast.LENGTH_SHORT).show();
     }
 }

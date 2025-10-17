@@ -21,9 +21,6 @@ import com.example.achstudapp.api.TokenManager;
 import com.example.achstudapp.models.AchievementWrapper;
 import com.example.achstudapp.models.User;
 import com.example.achstudapp.ui.LoginActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-
 
 import java.io.IOException;
 import java.util.List;
@@ -36,11 +33,10 @@ import retrofit2.Response;
 public class ProfileSelectFragments extends Fragment {
     ViewPager2 viewPager;
     TextView usernameView, emailView, collegeView, adminView;
-    Button prevButton, nextButton, logoutButton;
+    Button prevButton, nextButton;
     ApiService api;
     TokenManager tokenManager;
 
-    BottomNavigationView bottomNavigationView;
     int userId = -1;
 
     @Override
@@ -57,7 +53,6 @@ public class ProfileSelectFragments extends Fragment {
 
         prevButton = view.findViewById(R.id.prevButton);
         nextButton = view.findViewById(R.id.nextButton);
-        logoutButton = view.findViewById(R.id.logout);
 
         adminView.setVisibility(ViewPager2.GONE);
 
@@ -113,8 +108,6 @@ public class ProfileSelectFragments extends Fragment {
         });
 
         loadUserById(userId);
-
-        logoutButton.setOnClickListener(v -> logout());
 
         return view;
     }
@@ -176,11 +169,5 @@ public class ProfileSelectFragments extends Fragment {
         } else {
             viewPager.setAdapter(new AchievementAdapter(achievements));
         }
-    }
-
-    private void logout() {
-        tokenManager.clearToken();
-        startActivity(new Intent(requireContext(), LoginActivity.class));
-        Toast.makeText(requireContext(), "Вы успешно вышли из аккаунта", Toast.LENGTH_SHORT).show();
     }
 }

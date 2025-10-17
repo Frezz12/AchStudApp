@@ -99,14 +99,14 @@
     <!--        android:columnCount="4"-->
     <!--        android:padding="10dp">-->
 
-    <!--        <include-->
-    <!--            android:id="@+id/ach_lite_button"-->
-    <!--            layout="@layout/ach_lite"-->
-    <!--            android:layout_marginEnd="10dp"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="125dp">-->
-    <!--        </include>-->
+<!--            <include-->
+<!--                android:id="@+id/ach_lite_button"-->
+<!--                layout="@layout/ach_lite"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="125dp">-->
+<!--            </include>-->
 
     <!--        <include-->
     <!--            android:id="@+id/ach_lite_button"-->
@@ -165,15 +165,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <Button
             android:id="@+id/prevButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="30dp"
             android:layout_marginTop="10dp"
             android:text="@string/prevAch"
             android:textColor="#FFFFFF" />
@@ -183,7 +182,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
-            android:layout_marginBottom="30dp"
             android:layout_marginTop="10dp"
             android:text="@string/nextAch"
             android:textColor="#FFFFFF" />
@@ -196,12 +194,14 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/logout"
+    <include
+        android:id="@+id/ach_lite_button"
+        layout="@layout/curator_panel"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:background="@color/logout"
-        android:text="Выйди из аккаунта" />
+        android:layout_height="125dp">
+    </include>
 
 
 </LinearLayout>

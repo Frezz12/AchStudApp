@@ -21,6 +21,7 @@ import com.example.achstudapp.models.AchievementWrapper;
 import com.example.achstudapp.models.User;
 import com.example.achstudapp.ui.fragments.ProfileFragment;
 import com.example.achstudapp.ui.fragments.SearchFragment;
+import com.example.achstudapp.ui.fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 selected = new ProfileFragment();
             } else if (item.getItemId() == R.id.nav_search) {
                 selected = new SearchFragment();
+            } else if (item.getItemId() == R.id.nav_settings) {
+                selected = new SettingsFragment();
             }
 
             if (selected != null) {
