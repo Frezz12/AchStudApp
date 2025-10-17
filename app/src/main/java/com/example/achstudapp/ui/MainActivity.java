@@ -56,22 +56,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        viewPager = findViewById(R.id.viewPager);
-
-        usernameView = findViewById(R.id.usernameView);
-        emailView = findViewById(R.id.emailView);
-        collegeView = findViewById(R.id.collegeView);
-        adminView = findViewById(R.id.adminView);
-
-        prevButton = findViewById(R.id.prevButton);
-        nextButton = findViewById(R.id.nextButton);
-        logoutButton = findViewById(R.id.logout);
-
-        adminView.setVisibility(ViewPager2.GONE);
-
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        loadFragment(new ProfileFragment());
+        ProfileFragment fragment = new ProfileFragment();
+        Bundle args = new Bundle();
+        args.putInt("userId", tokenManager.getUserId());
+        fragment.setArguments(args);
+        loadFragment(fragment);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selected = null;
@@ -82,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 selected = new SearchFragment();
             }
 
-
             if (selected != null) {
                 loadFragment(selected);
                 return true;
@@ -90,122 +80,14 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        // Проверка на null для кнопок
-        if (prevButton == null) {
-            Log.e("MainActivity", "prevButton не найден в макете");
-            Toast.makeText(this, "Ошибка: кнопка 'Назад' не найдена", Toast.LENGTH_SHORT).show();
-        }
-        if (nextButton == null) {
-            Log.e("MainActivity", "nextButton не найден в макете");
-            Toast.makeText(this, "Ошибка: кнопка 'Вперёд' не найдена", Toast.LENGTH_SHORT).show();
-        }
-
         api = ApiClient.getClient(token).create(ApiService.class);
 
         if (getIntent().hasExtra("userId")) {
             userId = getIntent().getIntExtra("userId", userId);
         }
-
-        // Настройка кнопок навигации
-        if (prevButton != null) {
-            prevButton.setOnClickListener(v -> {
-                int currentItem = viewPager.getCurrentItem();
-                if (currentItem > 0) {
-                    viewPager.setCurrentItem(currentItem - 1, true);
-                }
-            });
-        }
-
-        if (nextButton != null) {
-            nextButton.setOnClickListener(v -> {
-                int currentItem = viewPager.getCurrentItem();
-                if (viewPager.getAdapter() != null && currentItem < viewPager.getAdapter().getItemCount() - 1) {
-                    viewPager.setCurrentItem(currentItem + 1, true);
-                }
-            });
-        }
-
-        // Отключение кнопок на границах
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                if (prevButton != null) {
-                    prevButton.setEnabled(position > 0);
-                }
-                if (nextButton != null && viewPager.getAdapter() != null) {
-                    nextButton.setEnabled(position < viewPager.getAdapter().getItemCount() - 1);
-                }
-            }
-        });
-
-        loadUserById(userId);
-
-        logoutButton.setOnClickListener(v -> logout());
     }
 
-    private void loadUserById(int id) {
-        Log.d("MainActivity", "Загрузка пользователя с id: " + id);
-        api.getUserById(id).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Log.d("MainActivity", "Ответ на getUserById: code=" + response.code());
-                if (response.isSuccessful() && response.body() != null) {
-                    displayUser(response.body());
-                } else {
-                    String errorMsg = "Ошибка получения пользователя: code=" + response.code();
-                    if (response.errorBody() != null) {
-                        try {
-                            errorMsg += ", " + response.errorBody().string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    Log.e("MainActivity", errorMsg);
-                    Toast.makeText(MainActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
-                    if (response.code() == 401) {
-                        tokenManager.clearToken();
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        finish();
-                    }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.e("MainActivity", "Ошибка сети: " + t.getMessage());
-                Toast.makeText(MainActivity.this, "Ошибка: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void displayUser(User user) {
-        usernameView.setText(user.getFirstname() + " " + user.getLastname());
-        emailView.setText(user.getEmail());
-        collegeView.setText(user.getCollege());
-        List<AchievementWrapper> achievements = user.getAchievements();
-        Log.d("MainActivity", "Достижения: " + (achievements != null ? achievements.size() : "null"));
-
-        if (Objects.equals(user.getRole(),"admin")) {
-            adminView.setVisibility(ViewPager2.VISIBLE);
-        }
-
-        if (Objects.equals(user.getRole(),"curator")) {
-
-        }
-        if (achievements == null || achievements.isEmpty()) {
-            Toast.makeText(this, "Достижения отсутствуют", Toast.LENGTH_SHORT).show();
-            viewPager.setAdapter(new AchievementAdapter(null));
-        } else {
-            viewPager.setAdapter(new AchievementAdapter(achievements));
-        }
-    }
-
-    private void logout() {
-        tokenManager.clearToken();
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        Toast.makeText(this, "Вы успешно вышли из аккаунта", Toast.LENGTH_SHORT).show();
-    }
 
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()

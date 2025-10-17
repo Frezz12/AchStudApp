@@ -1,7 +1,5 @@
 package com.example.achstudapp.ui.fragments;
 
-
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,8 +21,9 @@ import com.example.achstudapp.api.TokenManager;
 import com.example.achstudapp.models.AchievementWrapper;
 import com.example.achstudapp.models.User;
 import com.example.achstudapp.ui.LoginActivity;
-import com.example.achstudapp.ui.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+
 
 import java.io.IOException;
 import java.util.List;
@@ -34,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileFragment extends Fragment {
+public class ProfileSelectFragments extends Fragment {
     ViewPager2 viewPager;
     TextView usernameView, emailView, collegeView, adminView;
     Button prevButton, nextButton, logoutButton;
@@ -62,13 +61,12 @@ public class ProfileFragment extends Fragment {
 
         adminView.setVisibility(ViewPager2.GONE);
 
-//        if (getArguments() != null) {
-//            userId = getArguments().getInt("userId", -1);
-//        }
+        if (getArguments() != null) {
+            userId = getArguments().getInt("userId", -1);
+        }
 
         tokenManager = new TokenManager(requireContext());
         String token = tokenManager.getToken();
-        userId = tokenManager.getUserId();
         api = ApiClient.getClient(token).create(ApiService.class);
 
         // Проверка на null для кнопок
