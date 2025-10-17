@@ -1,5 +1,7 @@
 package com.example.achstudapp.api;
 
+import com.example.achstudapp.models.AchievementItem;
+import com.example.achstudapp.models.AchievementsItemRequest;
 import com.example.achstudapp.models.LoginRequest;
 import com.example.achstudapp.models.LoginResponse;
 import com.example.achstudapp.models.RegisterRequest;
@@ -27,5 +29,11 @@ public interface ApiService {
 
     @GET("users")
     Call<List<User>> getAllUsers();
+
+    @POST("achievements")
+    Call<AchievementItem> createAchievement(@Body AchievementsItemRequest body);
+
+    @GET("achievements")
+    Call<List<AchievementItem>> getAllMyAchievement();
 
 }

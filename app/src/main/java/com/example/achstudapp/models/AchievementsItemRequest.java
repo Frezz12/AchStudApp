@@ -1,13 +1,11 @@
 package com.example.achstudapp.models;
 
-public class AchievementItem {
-    private int id;
-    private String uuid;
+public class AchievementsItemRequest {
     private String title;
     private String description;
     private int starPoints;
 
-    public AchievementItem(String title, String description, int starPoints) {
+    public AchievementsItemRequest(String title, String description, int starPoints) {
         this.title = title;
         this.description = description;
         this.starPoints = starPoints;

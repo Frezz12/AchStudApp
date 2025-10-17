@@ -37,11 +37,9 @@ import retrofit2.Response;
 public class ProfileFragment extends Fragment {
     ViewPager2 viewPager;
     TextView usernameView, emailView, collegeView, adminView;
-    Button prevButton, nextButton, logoutButton, createAchBtn;
+    Button prevButton, nextButton, logoutButton, createAchBtn, allAchBtn;
     ApiService api;
     TokenManager tokenManager;
-
-    BottomNavigationView bottomNavigationView;
     int userId = -1;
 
     @Override
@@ -60,6 +58,7 @@ public class ProfileFragment extends Fragment {
         nextButton = view.findViewById(R.id.nextButton);
         logoutButton = view.findViewById(R.id.logout);
         createAchBtn = view.findViewById(R.id.createAchBtn);
+        allAchBtn = view.findViewById(R.id.allAchBtn);
 
         adminView.setVisibility(ViewPager2.GONE);
 
@@ -121,6 +120,16 @@ public class ProfileFragment extends Fragment {
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, createAchFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        allAchBtn.setOnClickListener(v -> {
+            ViewAllAchFragment viewAllAchFragment = new ViewAllAchFragment();
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, viewAllAchFragment)
                     .addToBackStack(null)
                     .commit();
         });
