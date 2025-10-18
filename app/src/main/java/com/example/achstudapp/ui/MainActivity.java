@@ -89,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
             userId = getIntent().getIntExtra("userId", userId);
         }
     }
-
-
-
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
