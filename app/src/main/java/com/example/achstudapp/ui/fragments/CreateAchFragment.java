@@ -18,7 +18,11 @@ import com.example.achstudapp.api.ApiService;
 import com.example.achstudapp.api.TokenManager;
 import com.example.achstudapp.models.AchievementItem;
 import com.example.achstudapp.models.AchievementsItemRequest;
+import com.example.achstudapp.models.GrandToStudentRequest;
+import com.example.achstudapp.models.StudentAchievementResponce;
 import com.example.achstudapp.ui.LoginActivity;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +34,8 @@ public class CreateAchFragment extends Fragment {
     Button createBtn;
     ApiService api;
     TokenManager tokenManager;
+
+    int userId = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +51,7 @@ public class CreateAchFragment extends Fragment {
         tokenManager = new TokenManager(requireContext());
         String token = tokenManager.getToken();
         api = ApiClient.getClient(token).create(ApiService.class);
+        userId = tokenManager.getUserId();
 
         createBtn.setOnClickListener(v -> create());
 
@@ -89,18 +96,34 @@ public class CreateAchFragment extends Fragment {
                 descStr,
                 value
         );
+
         api.createAchievement(req).enqueue(new Callback<AchievementItem>() {
             @Override
             public void onResponse(Call<AchievementItem> call, Response<AchievementItem> response) {
                 Log.d("CreateAchFragment", "Ответ от сервера: code=" + response.code());
                 if (response.isSuccessful() && response.body() != null) {
-                    ViewAllAchFragment viewAllAchFragment = new ViewAllAchFragment();
+                    GrandToStudentRequest reqGrand = new GrandToStudentRequest(
+                            response.body().getId()
+                    );
+                    api.grandToStudent(userId, reqGrand).enqueue(new Callback<StudentAchievementResponce>() {
+                        @Override
+                        public void onResponse(Call<StudentAchievementResponce> call, Response<StudentAchievementResponce> response) {
 
-                    requireActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, viewAllAchFragment)
-                            .addToBackStack(null)
-                            .commit();
+                            ViewAllAchFragment viewAllAchFragment = new ViewAllAchFragment();
+
+                            requireActivity().getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_container, viewAllAchFragment)
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
+
+                        @Override
+                        public void onFailure(Call<StudentAchievementResponce> call, Throwable t) {
+                            Log.e("grandToStudent", "Ошибка сети: " + t.getMessage());
+                            Toast.makeText(requireContext(), "Ошибка: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
             @Override

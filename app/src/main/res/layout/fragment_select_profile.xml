@@ -188,20 +188,4 @@
             android:text="@string/nextAch"
             android:textColor="#FFFFFF" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:background="@color/logout"
-        android:text="Выйди из аккаунта" />
-
-
 </LinearLayout>

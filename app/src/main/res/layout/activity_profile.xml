@@ -195,7 +195,7 @@
     </LinearLayout>
 
     <include
-        android:id="@+id/ach_lite_button"
+        android:id="@+id/curatorPanel"
         layout="@layout/curator_panel"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"

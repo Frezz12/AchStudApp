@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -38,6 +39,8 @@ public class ProfileFragment extends Fragment {
     ViewPager2 viewPager;
     TextView usernameView, emailView, collegeView, adminView;
     Button prevButton, nextButton, logoutButton, createAchBtn, allAchBtn;
+
+    ConstraintLayout curatorPanel;
     ApiService api;
     TokenManager tokenManager;
     int userId = -1;
@@ -54,6 +57,8 @@ public class ProfileFragment extends Fragment {
         collegeView = view.findViewById(R.id.collegeView);
         adminView = view.findViewById(R.id.adminView);
 
+        curatorPanel = view.findViewById(R.id.curatorPanel);
+
         prevButton = view.findViewById(R.id.prevButton);
         nextButton = view.findViewById(R.id.nextButton);
         logoutButton = view.findViewById(R.id.logout);
@@ -61,6 +66,7 @@ public class ProfileFragment extends Fragment {
         allAchBtn = view.findViewById(R.id.allAchBtn);
 
         adminView.setVisibility(ViewPager2.GONE);
+        curatorPanel.setVisibility(ViewPager2.GONE);
 
 //        if (getArguments() != null) {
 //            userId = getArguments().getInt("userId", -1);
@@ -185,10 +191,11 @@ public class ProfileFragment extends Fragment {
 
         if (Objects.equals(user.getRole(),"admin")) {
             adminView.setVisibility(ViewPager2.VISIBLE);
+            curatorPanel.setVisibility(ViewPager2.VISIBLE);
         }
 
         if (Objects.equals(user.getRole(),"curator")) {
-
+            curatorPanel.setVisibility(ViewPager2.VISIBLE);
         }
         if (achievements == null || achievements.isEmpty()) {
             Toast.makeText(requireContext(), "Достижения отсутствуют", Toast.LENGTH_SHORT).show();

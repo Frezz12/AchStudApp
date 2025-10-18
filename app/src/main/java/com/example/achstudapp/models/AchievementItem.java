@@ -13,6 +13,8 @@ public class AchievementItem {
         this.starPoints = starPoints;
     }
 
+    public int getId() {return id;}
+
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public int getStarPoints() { return starPoints; }
