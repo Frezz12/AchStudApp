@@ -23,7 +23,7 @@ public class SettingsFragment extends Fragment {
     ApiService api;
 
     int userId = -1;
-    private Button logoutButton;
+    Button logoutButton, updateButton;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,6 +35,17 @@ public class SettingsFragment extends Fragment {
         api = ApiClient.getClient(token).create(ApiService.class);
 
         logoutButton = view.findViewById(R.id.logout);
+        updateButton = view.findViewById(R.id.updateBtn);
+
+        updateButton.setOnClickListener(v -> {
+            UpdateFragment updateFragment = new UpdateFragment();
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, updateFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         logoutButton.setOnClickListener(v -> logout());
 

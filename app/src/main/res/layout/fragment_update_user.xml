@@ -16,51 +16,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Название" />
-
         <EditText
-            android:id="@+id/editTitle"
+            android:id="@+id/editFirstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Описание" />
-
         <EditText
-            android:id="@+id/editDesc"
+            android:id="@+id/editLastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Количество звезд" />
-
         <EditText
-            android:id="@+id/editStar"
+            android:id="@+id/editSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
+        <EditText
+            android:id="@+id/editEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Id студента" />
+            android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/studId"
+            android:id="@+id/editCollege"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/createBtn"
+            android:id="@+id/updateBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Создать">
+            android:text="Обновить">
         </Button>
     </LinearLayout>
 

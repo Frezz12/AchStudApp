@@ -32,7 +32,7 @@ import retrofit2.Response;
 
 public class ProfileSelectFragments extends Fragment {
     ViewPager2 viewPager;
-    TextView usernameView, emailView, collegeView, adminView;
+    TextView usernameView, emailView, collegeView, adminView, allAchBtn;
     Button prevButton, nextButton;
     ApiService api;
     TokenManager tokenManager;
@@ -53,6 +53,8 @@ public class ProfileSelectFragments extends Fragment {
 
         prevButton = view.findViewById(R.id.prevButton);
         nextButton = view.findViewById(R.id.nextButton);
+        allAchBtn = view.findViewById(R.id.allAchBtn);
+
 
         adminView.setVisibility(ViewPager2.GONE);
 
@@ -105,6 +107,20 @@ public class ProfileSelectFragments extends Fragment {
                     nextButton.setEnabled(position < viewPager.getAdapter().getItemCount() - 1);
                 }
             }
+        });
+
+        allAchBtn.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("userId", userId);
+
+            ViewAllAchFragment viewAllAchFragment = new ViewAllAchFragment();
+            viewAllAchFragment.setArguments(bundle);
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, viewAllAchFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         loadUserById(userId);

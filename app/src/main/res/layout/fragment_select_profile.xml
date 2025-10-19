@@ -85,13 +85,6 @@
     </LinearLayout>
 
     <!-- Grid of Stars -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Достижения"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:padding="10dp" />
 
     <!--    <GridLayout-->
     <!--        android:layout_width="match_parent"-->
@@ -154,6 +147,30 @@
     <!--        </include>-->
 
     <!--    </GridLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Достижения"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/allAchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:padding="10dp"
+            android:text="Посмотреть все"
+            android:textSize="14sp" />
+    </RelativeLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

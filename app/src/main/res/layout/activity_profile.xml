@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#F5F5F5">
 
-    <!-- Profile Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -20,7 +19,6 @@
             android:layout_marginTop="50dp"
             android:src="@drawable/userlogo"
             android:background="@drawable/rounded_image"
-
             />
 
         <LinearLayout
@@ -84,76 +82,33 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Grid of Stars -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Достижения"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:padding="10dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
 
-    <!--    <GridLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:columnCount="4"-->
-    <!--        android:padding="10dp">-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Достижения"
+            android:fontFamily="@font/rubik_regular"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-<!--            <include-->
-<!--                android:id="@+id/ach_lite_button"-->
-<!--                layout="@layout/ach_lite"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="125dp">-->
-<!--            </include>-->
-
-    <!--        <include-->
-    <!--            android:id="@+id/ach_lite_button"-->
-    <!--            layout="@layout/ach_lite"-->
-    <!--            android:layout_marginEnd="10dp"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="125dp">-->
-    <!--        </include>-->
-
-    <!--        <include-->
-    <!--            android:id="@+id/ach_lite_button"-->
-    <!--            layout="@layout/ach_lite"-->
-    <!--            android:layout_marginEnd="10dp"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="125dp">-->
-    <!--        </include>-->
-
-    <!--        <include-->
-    <!--            android:id="@+id/ach_lite_button"-->
-    <!--            layout="@layout/ach_lite"-->
-    <!--            android:layout_marginEnd="10dp"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="125dp">-->
-    <!--        </include>-->
-
-    <!--        <include-->
-    <!--            android:id="@+id/ach_lite_button"-->
-    <!--            layout="@layout/ach_lite"-->
-    <!--            android:layout_marginEnd="10dp"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="125dp">-->
-    <!--        </include>-->
-
-    <!--        <include-->
-    <!--            android:id="@+id/ach_lite_button"-->
-    <!--            layout="@layout/ach_lite"-->
-    <!--            android:layout_marginEnd="10dp"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="125dp">-->
-    <!--        </include>-->
-
-    <!--    </GridLayout>-->
+        <TextView
+            android:id="@+id/allAchBtnMyProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:padding="10dp"
+            android:textColor="@color/grayText"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Посмотреть все"
+            android:textSize="14sp" />
+    </RelativeLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -187,21 +142,13 @@
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-
-    </LinearLayout>
-
     <include
         android:id="@+id/curatorPanel"
         layout="@layout/curator_panel"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="125dp">
+        android:layout_height="wrap_content">
     </include>
-
 
 </LinearLayout>

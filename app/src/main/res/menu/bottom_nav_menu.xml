@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/nav_search"
-        android:title="Поиск" />
+        android:icon="@drawable/search_icon"
+        android:title="" />
 
     <item
         android:id="@+id/nav_profile"
-        android:title="Профиль" />
+        android:icon="@drawable/profile_icon"
+        android:title="" />
 
     <item
         android:id="@+id/nav_settings"
-        android:title="Настройки"
-        />
+        android:icon="@drawable/settings_icon"
+        app:showAsAction="always"
+        android:background="@android:color/transparent"
+        android:title=""
+ />
 </menu>

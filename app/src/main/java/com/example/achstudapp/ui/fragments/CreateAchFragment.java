@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class CreateAchFragment extends Fragment {
 
-    EditText editTitle, editDesc, editStar;
+    EditText editTitle, editDesc, editStar, studId;
     Button createBtn;
     ApiService api;
     TokenManager tokenManager;
@@ -45,13 +45,14 @@ public class CreateAchFragment extends Fragment {
         editTitle = view.findViewById(R.id.editTitle);
         editDesc = view.findViewById(R.id.editDesc);
         editStar = view.findViewById(R.id.editStar);
+        studId = view.findViewById(R.id.studId);
 
         createBtn = view.findViewById(R.id.createBtn);
 
         tokenManager = new TokenManager(requireContext());
         String token = tokenManager.getToken();
         api = ApiClient.getClient(token).create(ApiService.class);
-        userId = tokenManager.getUserId();
+
 
         createBtn.setOnClickListener(v -> create());
 
@@ -62,6 +63,8 @@ public class CreateAchFragment extends Fragment {
         String titleStr = editTitle.getText().toString().trim();
         String descStr = editDesc.getText().toString().trim();
         String starStr = editStar.getText().toString().trim();
+        String userIdStr = studId.getText().toString();
+        userId = Integer.parseInt(userIdStr);
 
         if (titleStr.isEmpty()) {
             Toast.makeText(requireContext(), "Введите название", Toast.LENGTH_SHORT).show();

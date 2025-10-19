@@ -42,14 +42,6 @@ public class UserAllAchievementsApdapter extends RecyclerView.Adapter<UserAllAch
 
     @Override
     public void onBindViewHolder(@NonNull UserAllAchievementsApdapter.UserAllAchievementsViewHolder holder, int position) {
-//        User user = filteredUsers.get(position);
-//        holder.name.setText(user.getFirstname() + " " + user.getLastname());
-//        holder.email.setText(user.getEmail());
-//        holder.college.setText(user.getCollege());
-//        holder.role.setText(user.getRole());
-//
-//        holder.itemView.setOnClickListener(v -> listener.onUserClick(user));
-
         StudentAchievementResponce studentAchievementResponce = allMyAchievements.get(position);
         Log.d("onBindViewHolder", studentAchievementResponce.getUser().getFirstname());
 
@@ -61,6 +53,8 @@ public class UserAllAchievementsApdapter extends RecyclerView.Adapter<UserAllAch
         holder.title.setText(achievementItem.getTitle());
         holder.desc.setText(achievementItem.getDescription());
         holder.star.setText(String.valueOf(achievementItem.getStarPoints()));
+
+        holder.itemView.setOnClickListener(v -> listener.onUserClick(studentAchievementResponce));
     }
 
     @Override

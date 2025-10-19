@@ -51,7 +51,10 @@ public class ViewAllAchFragment extends Fragment {
         tokenManager = new TokenManager(requireContext());
         String token = tokenManager.getToken();
         api = ApiClient.getClient(token).create(ApiService.class);
-        userId = tokenManager.getUserId();
+
+        if (getArguments() != null) {
+            userId = getArguments().getInt("userId", -1);
+        }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 

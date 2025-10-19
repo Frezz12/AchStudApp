@@ -37,8 +37,8 @@ import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
     ViewPager2 viewPager;
-    TextView usernameView, emailView, collegeView, adminView;
-    Button prevButton, nextButton, logoutButton, createAchBtn, allAchBtn;
+    TextView usernameView, emailView, collegeView, adminView, allAchBtn;
+    Button prevButton, nextButton, logoutButton, createAchBtn;
 
     ConstraintLayout curatorPanel;
     ApiService api;
@@ -56,6 +56,7 @@ public class ProfileFragment extends Fragment {
         emailView = view.findViewById(R.id.emailView);
         collegeView = view.findViewById(R.id.collegeView);
         adminView = view.findViewById(R.id.adminView);
+        allAchBtn = view.findViewById(R.id.allAchBtnMyProfile);
 
         curatorPanel = view.findViewById(R.id.curatorPanel);
 
@@ -63,7 +64,6 @@ public class ProfileFragment extends Fragment {
         nextButton = view.findViewById(R.id.nextButton);
         logoutButton = view.findViewById(R.id.logout);
         createAchBtn = view.findViewById(R.id.createAchBtn);
-        allAchBtn = view.findViewById(R.id.allAchBtn);
 
         adminView.setVisibility(ViewPager2.GONE);
         curatorPanel.setVisibility(ViewPager2.GONE);
@@ -131,7 +131,11 @@ public class ProfileFragment extends Fragment {
         });
 
         allAchBtn.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("userId", userId);
+
             ViewAllAchFragment viewAllAchFragment = new ViewAllAchFragment();
+            viewAllAchFragment.setArguments(bundle);
 
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()

@@ -9,12 +9,15 @@ import com.example.achstudapp.models.RegisterRequest;
 import com.example.achstudapp.models.RegisterResponse;
 import com.example.achstudapp.models.StudentAchievementResponce;
 import com.example.achstudapp.models.User;
+import com.example.achstudapp.models.UserUpdateRequest;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
@@ -46,4 +49,12 @@ public interface ApiService {
     @POST("users/{studentId}/achievements")
     Call<StudentAchievementResponce> grandToStudent(@Path("studentId") int studentId, @Body GrandToStudentRequest body);
 
+    @GET("student-achievements/{id}")
+    Call<StudentAchievementResponce> getStudAchById(@Path("id") int id);
+
+    @DELETE("student-achievements/{id}")
+    Call<Void> deleteStudAch(@Path("id") int id);
+
+    @PATCH("users/{id}")
+    Call<User> updateUser(@Path("id") int id, @Body UserUpdateRequest body);
 }
