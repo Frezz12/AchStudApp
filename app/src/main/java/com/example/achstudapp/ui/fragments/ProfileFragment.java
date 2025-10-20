@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +39,8 @@ import retrofit2.Response;
 public class ProfileFragment extends Fragment {
     ViewPager2 viewPager;
     TextView usernameView, emailView, collegeView, adminView, allAchBtn;
-    Button prevButton, nextButton, logoutButton, createAchBtn;
-
+    Button logoutButton, createAchBtn, changeRoleBtn;
+    ImageButton prevButton, nextButton;
     ConstraintLayout curatorPanel;
     ApiService api;
     TokenManager tokenManager;
@@ -64,6 +65,7 @@ public class ProfileFragment extends Fragment {
         nextButton = view.findViewById(R.id.nextButton);
         logoutButton = view.findViewById(R.id.logout);
         createAchBtn = view.findViewById(R.id.createAchBtn);
+        changeRoleBtn = view.findViewById(R.id.changeRoleAchBtn);
 
         adminView.setVisibility(ViewPager2.GONE);
         curatorPanel.setVisibility(ViewPager2.GONE);
@@ -87,7 +89,6 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(requireContext(), "Ошибка: кнопка 'Вперёд' не найдена", Toast.LENGTH_SHORT).show();
         }
 
-        // Настройка кнопок навигации
         if (prevButton != null) {
             prevButton.setOnClickListener(v -> {
                 int currentItem = viewPager.getCurrentItem();
@@ -106,7 +107,6 @@ public class ProfileFragment extends Fragment {
             });
         }
 
-        // Отключение кнопок на границах
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -126,6 +126,16 @@ public class ProfileFragment extends Fragment {
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, createAchFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        changeRoleBtn.setOnClickListener(v -> {
+            ChangeRoleUserForAdminFragment changeRoleUserForAdminFragment = new ChangeRoleUserForAdminFragment();
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, changeRoleUserForAdminFragment)
                     .addToBackStack(null)
                     .commit();
         });

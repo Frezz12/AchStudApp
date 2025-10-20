@@ -34,7 +34,6 @@ public class CreateAchFragment extends Fragment {
     Button createBtn;
     ApiService api;
     TokenManager tokenManager;
-
     int userId = -1;
 
     @Override
@@ -47,7 +46,7 @@ public class CreateAchFragment extends Fragment {
         editStar = view.findViewById(R.id.editStar);
         studId = view.findViewById(R.id.studId);
 
-        createBtn = view.findViewById(R.id.createBtn);
+        createBtn = view.findViewById(R.id.createABtn);
 
         tokenManager = new TokenManager(requireContext());
         String token = tokenManager.getToken();
@@ -111,7 +110,6 @@ public class CreateAchFragment extends Fragment {
                     api.grandToStudent(userId, reqGrand).enqueue(new Callback<StudentAchievementResponce>() {
                         @Override
                         public void onResponse(Call<StudentAchievementResponce> call, Response<StudentAchievementResponce> response) {
-
                             ViewAllAchFragment viewAllAchFragment = new ViewAllAchFragment();
 
                             requireActivity().getSupportFragmentManager()

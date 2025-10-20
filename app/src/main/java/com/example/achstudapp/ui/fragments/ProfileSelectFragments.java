@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ import retrofit2.Response;
 public class ProfileSelectFragments extends Fragment {
     ViewPager2 viewPager;
     TextView usernameView, emailView, collegeView, adminView, allAchBtn;
-    Button prevButton, nextButton;
+    ImageButton prevButton, nextButton;
     ApiService api;
     TokenManager tokenManager;
 

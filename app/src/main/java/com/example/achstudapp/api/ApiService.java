@@ -2,6 +2,7 @@ package com.example.achstudapp.api;
 
 import com.example.achstudapp.models.AchievementItem;
 import com.example.achstudapp.models.AchievementsItemRequest;
+import com.example.achstudapp.models.ChangeRoleUserForAdminRequest;
 import com.example.achstudapp.models.GrandToStudentRequest;
 import com.example.achstudapp.models.LoginRequest;
 import com.example.achstudapp.models.LoginResponse;
@@ -57,4 +58,7 @@ public interface ApiService {
 
     @PATCH("users/{id}")
     Call<User> updateUser(@Path("id") int id, @Body UserUpdateRequest body);
+
+    @PATCH("users/{id}")
+    Call<User> updateRoleUserForAdmin(@Path("id") int id, @Body ChangeRoleUserForAdminRequest body);
 }
