@@ -1,5 +1,7 @@
 package com.example.achstudapp.api;
 
+import android.util.Log;
+
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -15,11 +17,14 @@ public class ApiClient {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
                 .addInterceptor(logging);
 
-        if (token != null) {
+        if (token != null && !token.isEmpty()) {
             clientBuilder.addInterceptor(chain -> {
+                Log.d("ApiClient", "Token: " + token);
                 Request original = chain.request();
+
                 Request request = original.newBuilder()
-                        .header("Authorization", "Bearer " + token)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Authorization", "Bearer " + token)
                         .method(original.method(), original.body())
                         .build();
                 return chain.proceed(request);

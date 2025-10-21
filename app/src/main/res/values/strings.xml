@@ -4,5 +4,14 @@
     <string name="EmailStudentInProfile">Email@gmail.com</string>
     <string name="prevAch">Назад</string>
     <string name="nextAch">Далее</string>
-
+    <string name="register">Регистрация</string>
+    <string name="registered">Зарегистрироватся</string>
+    <string name="login">Войти</string>
+    <string name="email">Введите email</string>
+    <string name="password">Введите пароль</string>
+    <string name="emailHint">user@mail.ru</string>
+    <string name="firsnameHint">Введите Имя</string>
+    <string name="lastnameHint">Введите Фамилию</string>
+    <string name="surnameHint">Введите Отчество</string>
+    <string name="collegeHint">Где вы учитесь?</string>
 </resources>

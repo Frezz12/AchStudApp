@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +14,7 @@ import com.example.achstudapp.utils.RegisterDataManager;
 public class RegisterStep1Activity extends AppCompatActivity {
     private EditText editFirstname, editLastname, editSurname;
     private Button btnNext;
+    private ImageButton backBtnReg1;
     private RegisterDataManager dataManager;
 
     @Override
@@ -24,8 +26,13 @@ public class RegisterStep1Activity extends AppCompatActivity {
         editLastname = findViewById(R.id.lastname);
         editSurname = findViewById(R.id.surname);
         btnNext = findViewById(R.id.nextBtn);
+        backBtnReg1 = findViewById(R.id.backBtnReg1);
 
         dataManager = new RegisterDataManager(this);
+
+        backBtnReg1.setOnClickListener(v -> {
+            finish();
+        });
 
         btnNext.setOnClickListener(v -> {
             dataManager.saveStep1(

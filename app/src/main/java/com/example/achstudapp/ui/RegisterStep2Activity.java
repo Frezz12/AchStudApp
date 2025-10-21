@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.example.achstudapp.utils.RegisterDataManager;
 public class RegisterStep2Activity extends AppCompatActivity {
     private EditText editEmail, editPassword;
     private Button btnNext;
+    private ImageButton backBtnReg2;
     private RegisterDataManager dataManager;
 
     @Override
@@ -24,8 +26,13 @@ public class RegisterStep2Activity extends AppCompatActivity {
         editEmail = findViewById(R.id.email);
         editPassword = findViewById(R.id.password);
         btnNext = findViewById(R.id.nextBtn2);
+        backBtnReg2 = findViewById(R.id.backBtnReg2);
 
         dataManager = new RegisterDataManager(this);
+
+        backBtnReg2.setOnClickListener(v -> {
+            finish();
+        });
 
         btnNext.setOnClickListener(v -> {
             dataManager.saveStep2(

@@ -7,4 +7,5 @@
     <color name="logout">#FF4D4D</color>
     <color name="EmailProfileColor">#7C000000</color>
     <color name="ach_background">#5056C1</color>
+    <color name="hintColorText">#9A6B6B6B</color>
 </resources>

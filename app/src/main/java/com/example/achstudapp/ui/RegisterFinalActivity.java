@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ import retrofit2.Response;
 
 public class RegisterFinalActivity extends AppCompatActivity {
     private Button btnRegister;
-
+    private ImageButton backBtnRegF;
     private EditText editCollege;
     private RegisterDataManager dataManager;
     private ApiService api;
@@ -41,6 +42,8 @@ public class RegisterFinalActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.registerBtn);
         editCollege = findViewById(R.id.college);
+        backBtnRegF = findViewById(R.id.backBtnRegF);
+
         dataManager = new RegisterDataManager(this);
         api = ApiClient.getClient(null).create(ApiService.class);
         tokenManager = new TokenManager(this);
@@ -51,6 +54,10 @@ public class RegisterFinalActivity extends AppCompatActivity {
 //                        "Роль: " + dataManager.getRole() + "\n" +
 //                        "Колледж: " + dataManager.getCollege()
 //        );
+
+        backBtnRegF.setOnClickListener(v -> {
+            finish();
+        });
 
         btnRegister.setOnClickListener(v -> {
             dataManager.saveStep3(
